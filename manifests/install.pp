@@ -40,17 +40,13 @@ class logentries::install (
   }
 
   apt::source { 'logentries':
-    location => 'http://rep.logentries.com/',
-    repos    => 'main',
-    key      => {
-      'id'     => 'C43C79AD',
-      'server' => 'keyserver.ubuntu.com'
-    },
-    include  => {
-      'src' => false,
-      'deb' => true,
-    },
-    before   => Package['logentries'],
+    location    => 'http://rep.logentries.com/',
+    repos       => 'main',
+    key         => 'C43C79AD',
+    key_server  => 'keyserver.ubuntu.com',
+    include_src => false,
+    include_deb => true,
+    before      => Package['logentries'],
   }
 
   package { 'logentries':

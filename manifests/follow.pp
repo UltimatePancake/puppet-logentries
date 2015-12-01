@@ -36,12 +36,6 @@ class logentries::follow (
   if $log_files[0] == undef {
     fail('Please specify at least one log file to monitor.')
   } else {
-    # each($log_files) |$value| {
-    #   exec { "follow_${value}":
-    #     command => "/usr/bin/le follow '${value}'",
-    #     notify  => Service['logentries'],
-    #   }
-    # }
     log_follow { $log_files: }
   }
 
