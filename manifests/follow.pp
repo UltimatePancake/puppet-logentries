@@ -29,9 +29,9 @@ class logentries::follow (
   if $log_files[0] == undef {
     fail('Please specify at least one log file to monitor.')
   } else {
-    $log_files.each |Integer $index, String $value| {
-      exec { 'follow_log':
-        command => "/usr/bin/le follow '${value}'",
+    $log_files.each |String $log| {
+      exec { "follow_${log}":
+        command => "/usr/bin/le follow '${log}'",
         notify  => Service['logentries'],
       }
     }
