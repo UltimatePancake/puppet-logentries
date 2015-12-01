@@ -45,7 +45,7 @@ class logentries::install (
     key         => 'C43C79AD',
     key_server  => 'keyserver.ubuntu.com',
     include_src => false,
-    include_deb => true,
+    # include_deb => true,
     before      => Package['logentries'],
   }
 
