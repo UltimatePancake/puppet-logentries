@@ -40,8 +40,7 @@ class logentries::follow (
   }
 
   service { 'logentries':
-    ensure      => running,
-    enable      => true,
-    refreshonly => true,
+    ensure => running,
+    enable => true,
   }
 }
