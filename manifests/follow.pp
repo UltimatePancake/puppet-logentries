@@ -26,7 +26,7 @@
 class logentries::follow (
   $log_files = [],
 ) {
-  if $log_files.empty? {
+  if $log_files[0] == undef {
     fail('Please specify at least one log file to monitor.')
   } else {
     $log_files.each |Integer $index, String $value| {

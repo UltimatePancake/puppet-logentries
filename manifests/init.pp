@@ -30,33 +30,4 @@
 #
 #   Pier-Angelo Gaetani 2015
 #
-class logentries (
-  $license_key = undef,
-  $use_latest  = true,
-  $log_files   = [],
-) {
-  if $license_key == undef {
-    fail('The license_key parameter must be defined.')
-  }
-
-  if $use_latest == true {
-    $package_ensure = 'latest'
-  } elsif $use_latest == false {
-    $package_ensure = 'present'
-  } else {
-    fail('The use_latest parameter must be true or false.')
-  }
-
-  if $log_files.empty? {
-    fail('Please specify at least one log file to monitor.')
-  }
-
-  class { '::install':
-    license_key => $license_key,
-    use_latest  => $use_latest,
-  }
-
-  class { '::follow':
-    log_files => $log_files,
-  }
-}
+class logentries {}
