@@ -30,6 +30,7 @@ class logentries::follow (
     exec { "log_${name}":
       command => "/usr/bin/le follow '${name}'",
       notify  => Service['logentries'],
+    }
   }
 
   if $log_files[0] == undef {
