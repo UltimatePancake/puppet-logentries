@@ -58,10 +58,10 @@ class logentries::install (
   exec { 'register_logentries_agent':
     command => $cmd_register,
     require => Package['logentries'],
-    before  => Package['logentries-agent'],
+    before  => Package['logentries-daemon'],
   }
 
-  package { 'logentries-agent':
+  package { 'logentries-daemon':
     ensure  => $package_ensure,
   }
 }
