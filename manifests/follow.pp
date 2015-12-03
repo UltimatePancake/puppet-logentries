@@ -8,13 +8,6 @@
 #
 # Examples:
 #
-#   class { 'logentries::follow':
-#     log_files = [
-#       "/var/log/nginx/access.log",
-#       "/var/log/*.log",
-#     ],
-#   }
-#
 # Authors:
 #
 #   Pier-Angelo Gaetani
@@ -24,19 +17,19 @@
 #   Pier-Angelo Gaetani 2015
 #
 class logentries::follow (
-  $log_files = [],
+  $log_files,
 ) {
-  define log_follow {
-    exec { "log_${name}":
-      command => "/usr/bin/le follow '${name}'",
+  define log_follow ($path) {
+    exec { $name:
+      command => "/usr/bin/le follow ${path} --name ${name}",
       notify  => Service['logentries'],
     }
   }
 
-  if $log_files[0] == undef {
+  if $log_files == undef {
     fail('Please specify at least one log file to monitor.')
   } else {
-    log_follow { $log_files: }
+    create_resources(log_follow, $log_files)
   }
 
   service { 'logentries':
