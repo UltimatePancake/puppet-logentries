@@ -4,11 +4,15 @@ Logentries.com log monitoring installation and configuration module.
 ## Usage
 
 ```ruby
-  class { 'logentries':
+  class { '::logentries::install':
     license_key => 'YOUR-LICENSE-KEY',
-    log_files = [
-      "/var/log/nginx/access.log",
-      "/var/log/*.log",
-    ],
+    before      => Class['::logentries::follow'],
+  }
+
+  class { '::logentries::follow':
+    log_files => {
+      'nginx_error'  => { 'path' => '/var/log/nginx/error.log' },
+      'some_log'     => { 'path' => '/path/to/your/log' },
+    },
   }
 ```
