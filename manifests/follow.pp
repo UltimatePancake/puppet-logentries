@@ -8,6 +8,13 @@
 #
 # Examples:
 #
+#   class { '::logentries::follow':
+#     log_files => {
+#       'nginx_error'  => { 'path' => '/var/log/nginx/error.log' },
+#       'some_log'     => { 'path' => '/path/to/your/log' },
+#     },
+#   }
+#
 # Authors:
 #
 #   Pier-Angelo Gaetani
@@ -21,7 +28,7 @@ class logentries::follow (
 ) {
   define log_follow ($path) {
     exec { $name:
-      command => "/usr/bin/le follow ${path} --name ${name}",
+      command => "/usr/bin/le follow \"${path}\" --name ${name}",
       notify  => Service['logentries'],
     }
   }
