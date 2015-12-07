@@ -53,10 +53,9 @@ class logentries::install (
     ensure => $package_ensure,
   }
 
-  $cmd_register = "/usr/bin/le register --account-key=${license_key}"
-
   exec { 'register_logentries_agent':
-    command => $cmd_register,
+    command => "le register --account-key=${license_key}",
+    path    => '/usr/bin/:/bin/',
     require => Package['logentries'],
     before  => Package['logentries-daemon'],
   }

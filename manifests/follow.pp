@@ -28,7 +28,9 @@ class logentries::follow (
 ) {
   define log_follow ($path) {
     exec { $name:
-      command => "/usr/bin/le follow \"${path}\" --name ${name}",
+      command => "le follow \"${path}\" --name ${name}",
+      path    => '/usr/bin/:/bin/',
+      unless  => "le followed \"${path}\"",
       notify  => Service['logentries'],
     }
   }
