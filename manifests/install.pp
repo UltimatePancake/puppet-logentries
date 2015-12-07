@@ -54,8 +54,9 @@ class logentries::install (
   }
 
   exec { 'register_logentries_agent':
-    command => "le register --account-key=${license_key}",
+    command => "le register --account-key=${license_key} && touch /etc/le/.registered",
     path    => '/usr/bin/:/bin/',
+    creates => '/etc/le/.registered',
     require => Package['logentries'],
     before  => Package['logentries-daemon'],
   }
