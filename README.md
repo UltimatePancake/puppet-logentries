@@ -1,4 +1,4 @@
-# puppet-newrelic
+# puppet-logentries
 Logentries.com log monitoring installation and configuration module.
 
 ## Usage
